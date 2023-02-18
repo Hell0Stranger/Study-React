@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+   <script>
+    import {createRoot} from 'react-dom/client';
+   </script>
+   <script>
+        const root = document.getElementById("root");
+        // firt argument -> tag name , second -> property or event , thrid -> content 
+        const title = React.createElement("h3", 
+                                        { id: "cute-span", 
+                                        style: {color : 'pink'},
+                                        onMouseEnter: () => console.log("mouse enter"),
+                                        }, 
+                                         "Hello I'm a span");
+        const btn = React.createElement("button",{
+            onClick: () => console.log("i'm clicked"),
+        }, "Click me");
+
+        const container = React.createElement("div", null, [title, btn] );
+        // ReactDOM.render(container, root); 기존 방식
+        ReactDOM.createRoot(root).render(
+            [btn, title]
+        )
+        
+
+    </script>
+</body>
+</html>
