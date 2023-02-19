@@ -77,7 +77,7 @@ const listItems = numbers.map((number) =>
 
 ```Javascript
 <script type="text/babel">
-        const root = document.getElementById("root");
+      const root = ReactDOM.createRoot(document.getElementById('root'));
         const Title = () => ( <h3 id="title" 
                         onMouseEnter={() => console.log("mouse enter!")}>
                         Hello I'm a title</h3>
@@ -95,11 +95,35 @@ const listItems = numbers.map((number) =>
                 <Title />
                 <Button />
             </div> )
-        ReactDOM.createRoot(root).render(
-        <Container />
-        )
+        root.render(<Container />)
     </script>
 ```
 
+## 화면에서 필요한 부분만 다시 render하고 싶을 때, state!
+
+- 자동으로 render를 해야하는 trigger가 되어주는것이 state
+- React.userState()를 사용하면 내가 바꾸고싶은 데이터와 그 데이터를 바꿀 때 사용하는 함수 정의가 가능
+- const data = React.userState(0); -> 이름을 다시 붙이려면 귀찮아진다 ex) const counter = data[0]
+- 조금 더 직관적인 코드는 const [counter, setCounter] = React.userState(0)
 
 
+```Javascript
+  const root = ReactDOM.createRoot(document.getElementById('root'));
+        function App() {
+            // Array를 받게됨 [undefined, f]
+            // undefined -> 내가 사용할 data / f -> data를 바꿀 때 사용하는 함수 / 초기값 설정가능
+            // const data = React.useState(0);
+            //Better way
+            const [counter, setCounter] = React.useState(0);
+            const onClick = () => {
+                setCounter(counter+1);
+            };
+            return (
+                <div>
+                    <h3>Total clicks: {counter}</h3>
+                    <button onClick={onClick}>Click me</button>
+                </div>
+            )
+        }
+        root.render(<App />)
+```

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script type="text/babel">
+       const root = ReactDOM.createRoot(document.getElementById('root'));
+        function App() {
+            // Array를 받게됨 [undefined, f]
+            // undefined -> 내가 사용할 data / f -> data를 바꿀 때 사용하는 함수 / 초기값 설정가능
+            // const data = React.useState(0);
+            //Better way
+            const [counter, setCounter] = React.useState(0);
+            const onClick = () => {
+                setCounter(counter+1);
+            };
+            return (
+                <div>
+                    <h3>Total clicks: {counter}</h3>
+                    <button onClick={onClick}>Click me</button>
+                </div>
+            )
+        }
+        root.render(<App />)
+    </script>
+</body> 
+</html>

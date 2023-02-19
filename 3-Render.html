@@ -12,20 +12,18 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        import { createRoot } from 'react-dom/client';
-        const root = document.getElementById("root");
+       const root = ReactDOM.createRoot(document.getElementById('root'));
         let counter = 0;
         // span.innerText =`Total clicks: ${counter}`;
         function countUp() {
             counter = counter + 1;
-            console.log(counter);
-            root.render(<Container />)
+           root.render(<Container />)
         }
         const Container = () => ( <div>
             <h3>Total clicks: {counter}</h3>
             <button onClick={countUp}>Click me</button>
             </div> )
-        ReactDOM.createRoot(root).render(<Container />)
+            root.render(<Container />)
     </script>
 </body> 
 </html>
