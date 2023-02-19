@@ -116,7 +116,14 @@ const listItems = numbers.map((number) =>
             //Better way
             const [counter, setCounter] = React.useState(0);
             const onClick = () => {
-                setCounter(counter+1);
+              
+                // setCounter(counter+1);
+                // 함수의 첫번째 argument는 현재값
+                // 현재의 state를 가지고 새로운 값을 계산, 아래가 더 안전한 방법
+                // 예기치못한 업데이트가 일어났다고해도 혼동을 방지해줄 수 있다.
+                // current가 현재 값이라는 것을 보장하기 때문
+                setCounter((current) => current +1);
+                
             };
             return (
                 <div>
