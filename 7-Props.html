@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="root"></div>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src ="https://cdnjs.cloudflare.com/ajax/libs/prop-types/15.8.1/prop-types.min.js"></script>
+    <script type="text/babel">
+       const root = ReactDOM.createRoot(document.getElementById('root'));
+       function Btn({btnName, fontSize, changeValue}) {
+        return (<button 
+                            onClick={changeValue}
+                            style={{backgroundColor : "powderblue",
+                                    fontSize
+                            }}>{btnName}</button>);
+       }
+       //prop에 넣는 것들은 자동으로 return으로 들어가지않는다
+       const MemorizedBtn = React.memo(Btn)
+       Btn.propTypes = {
+        btnName : PropTypes.string, //.isRequired (btn 컴포넌트를 render할때 무조건 렌더하게만듬)
+        fontSize : PropTypes.number,
+       }
+       function App() {
+            const [value, setValue] = React.useState("Save Changes");
+            const changeValue = () => setValue("Revert Changes");
+
+            return (
+                <div>
+                    <MemorizedBtn btnName={value}changeValue ={changeValue} fontSize = {20}/>
+                    <MemorizedBtn btnName="Confirm"/>
+                </div>
+            )
+            //부모의 state 변동이 있다면 자식이 무조건 re render 될 것인데
+            //추후에 application 속도 저하의 원인이 될 수 있다
+            //Reach.memo() 를 활용한다면, 변동이없는 컴포넌트에 대해서는 다시 render되지 않는다.
+        }
+        
+        root.render(<App />)
+    </script>
+</body> 
+</html>
